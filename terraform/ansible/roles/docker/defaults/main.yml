@@ -1,0 +1,32 @@
+---
+# dir for data-root for docker
+data_dir: "/data/docker"
+log_driver: "json"
+docker_packages:
+  EL7:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+    - python-pip
+#    - python36
+#    - python36-pip
+#    - policycoreutils-python3
+    - policycoreutils-python
+    - docker-ce
+  EL8:
+    - yum-utils
+    - python38
+    #- python36-pip
+    - docker-ce
+    - docker-ce-cli 
+    - containerd.io    
+    - conntrack
+    - conntrack-tools
+    - socat
+    - tc
+    - sudo
+    - curl
+    - openssl
+docker_compose_install: "yes"
+docker_compose_v: "1.27.4"
+

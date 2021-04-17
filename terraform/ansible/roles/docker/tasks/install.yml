@@ -1,0 +1,34 @@
+---
+- name: Install packages
+  package:
+    name: "{{ line_item }}"
+    state: present
+  loop:
+  - "{{ docker_packages['EL7'] }}"
+  loop_control:
+    loop_var: line_item
+  when:
+    - ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+    - ansible_distribution_major_version == '7'
+
+- name: Install packages
+  package:
+    name: "{{ line_item }}"
+    state: present
+  loop:
+  - "{{ docker_packages['EL8'] }}"
+  loop_control:
+    loop_var: line_item
+  when: 
+    - ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+    - ansible_distribution_major_version == '8'
+
+- name: Installing docker-compose
+  pip:
+    name: docker-compose
+    version: "{{ docker_compose_v }}"
+    state: present
+    extra_args: '--quiet'
+ #   executable: pip-3.6
+  when: (docker_compose_install == "yes")
+  notify: restart docker

@@ -1,0 +1,6 @@
+- name: ansible-plays
+  hosts: all
+  become: true
+  gather_facts: true
+  roles:
+  - docker

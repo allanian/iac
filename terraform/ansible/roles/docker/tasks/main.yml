@@ -1,0 +1,20 @@
+---
+- name: add-repo
+  include: add-repo.yml
+
+- name: install
+  include: install.yml
+
+- name: config
+  include: config.yml
+  async: 50
+  poll: 0
+
+- name: start docker
+  service:
+    name: docker
+    state: restarted
+    enabled: yes
+  async: 20
+  poll: 0
+
